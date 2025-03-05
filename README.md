@@ -1,4 +1,4 @@
-# Goldman Sachs Software Engineering Virtual Internship (Forage) - Crack Leaked Passwords Using Hashcat
+# Crack Leaked Passwords Using Hashcat - Goldman Sachs Software Engineering Virtual Internship (Forage) 
 
 ## Project Deliverables
 
