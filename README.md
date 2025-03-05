@@ -26,7 +26,10 @@ Here's a breakdown of the steps I took to crack the passwords in `passwordDump.t
     * Cleaned the file to isolate the hashes.
 
 2.  **Tool Setup:**
-    * Installed Hashcat using Homebrew: `brew install hashcat`.
+    * Installed Hashcat using Homebrew: 
+      ```bash
+      brew install hashcat
+      ```
 
 3.  **Hash Algorithm Identification:**
     * Utilized an online hash identifier (e.g., [hashes.com](https://hashes.com/en/tools/hash_identifier)) to determine the hash type: MD5.
@@ -58,3 +61,38 @@ Here's a breakdown of the steps I took to crack the passwords in `passwordDump.t
         hashcat -m 0 passwordDump.txt salted_rockyou.txt -r /opt/homebrew/Cellar/hashcat/6.2.6_1/share/doc/hashcat/rules/best64.rule --username
         ```
     * Result: 3 additional passwords cracked.
+
+## Security Analysis and Recommendations
+
+After analyzing the provided leaked passwords, the following security vulnerabilities and recommendations were identified:
+
+**Vulnerabilities:**
+
+* **Weak Hashing Algorithm (MD5):**
+    * The passwords were hashed using MD5, a highly insecure cryptographic hash function.
+    * MD5 is vulnerable to collision attacks, preimage attacks, and offers limited security, making password cracking significantly easier.
+* **Inadequate Password Policy:**
+    * A high percentage (89.47%) of passwords were cracked using basic methods (dictionary attacks, rule-based attacks, salting) in a short timeframe.
+    * This indicates a weak password policy allowing:
+        * Short password lengths (6 characters).
+        * Use of usernames within passwords.
+        * Weak password complexity, resulting in a small key space.
+
+**Recommendations:**
+
+To enhance password security and mitigate future attacks, the following measures are recommended:
+
+* **Implement Stronger Hashing Algorithms:**
+    * Replace MD5 with robust algorithms like bcrypt or Argon2.
+    * These algorithms are computationally intensive, incorporate salting and key stretching, and significantly increase the difficulty of password cracking.
+* **Enforce Strict Password Policies:**
+    * Mandate a minimum password length of 11 characters.
+    * Prohibit the use of usernames within passwords.
+    * Implement a password strength checker to prevent the use of common patterns.
+* **Implement Multi-Factor Authentication (MFA):**
+    * Add an extra layer of security by requiring multiple forms of authentication.
+* **Limit Login Attempts:**
+    * Implement login attempt limitations to prevent brute-force attacks.
+* **User Education:**
+    * Educate users on best practices for creating and managing strong passwords.
+
